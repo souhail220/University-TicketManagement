@@ -4,6 +4,7 @@ import java.sql.Connection;
 import java.sql.SQLException;
 
 import tn.isamm.ticketManagement.configuration.JdbcConfig;
+import tn.isamm.ticketManagement.scripts.FetchTablesData;
 
 public class App {
     public static void main(String[] args) throws Exception {
@@ -21,6 +22,21 @@ public class App {
         } catch (SQLException e) {
 
             System.out.println("Database connection failed!");
+            e.printStackTrace();
+        }
+
+
+        // Scripts
+        try{
+
+            // Create Table Script
+            //CreateTables.createTables();
+
+            // Fetch data scripts
+            FetchTablesData.fetchTables();
+
+        }catch(Exception e){
+            System.out.println("Table creation failed!");
             e.printStackTrace();
         }
     }
