@@ -16,13 +16,13 @@ public final class JdbcConfig {
     private static final String USER = System.getenv().getOrDefault("DB_USER", "postgres");
     private static final String PASSWORD = System.getenv().getOrDefault("DB_PASSWORD", "220410");
 
-    private JdbcConfig() {
-    }
+    private JdbcConfig() {}
 
     public static Connection getConnection() throws SQLException {
         return DriverManager.getConnection(URL, USER, PASSWORD);
     }
 
+    // JOOQ Config
     public static DSLContext createDslContext(Connection connection) {
         DefaultConfiguration configuration = new DefaultConfiguration();
         configuration.set(SQLDialect.POSTGRES);
