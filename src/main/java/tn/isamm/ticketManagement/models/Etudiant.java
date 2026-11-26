@@ -5,7 +5,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Etudiant {
-    private String id;
+    private long id;
     private String email;
     private String nom;
     private String telephone;
@@ -17,7 +17,7 @@ public class Etudiant {
     public Etudiant() {
     }
 
-    public Etudiant(String id, String email, String nom, String telephone,
+    public Etudiant(long id, String email, String nom, String telephone,
                     LocalDate dateNaissance, String adresse, Filiere filiere) {
         this.id = id;
         this.email = email;
@@ -28,8 +28,8 @@ public class Etudiant {
         this.filiere = filiere;
     }
 
-    public String getId() { return id; }
-    public void setId(String id) { this.id = id; }
+    public long getId() { return id; }
+    public void setId(long id) { this.id = id; }
     public String getEmail() { return email; }
     public void setEmail(String email) { this.email = email; }
     public String getNom() { return nom; }

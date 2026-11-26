@@ -21,6 +21,15 @@ public class JooqEtudiantRepository implements EtudiantRepository {
 
     @Override
     public Optional<Etudiant> findById(String id) {
+        try {
+            return findById(Long.parseLong(id));
+        } catch (NumberFormatException e) {
+            return Optional.empty();
+        }
+    }
+
+    @Override
+    public Optional<Etudiant> findById(long id) {
         Record record = dsl.select(ETUDIANT_ID, ETUDIANT_EMAIL, ETUDIANT_NOM,
                         ETUDIANT_TELEPHONE, ETUDIANT_DATE_NAISSANCE, ETUDIANT_ADRESSE)
                 .from(ETUDIANT)

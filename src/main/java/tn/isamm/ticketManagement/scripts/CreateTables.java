@@ -18,8 +18,8 @@ public final class CreateTables {
     public static void createTables() throws SQLException {
         createSpecialiteTable();
         createModeratorTable();
-        createTicketTable();
         createStudentTable();
+        createTicketTable();
     }
 
     public static void createTicketTable() throws SQLException {
@@ -33,8 +33,17 @@ public final class CreateTables {
                     .column("titre", SQLDataType.VARCHAR(200))
                     .column("description", SQLDataType.CLOB)
                     .column("tag", SQLDataType.VARCHAR(100))
+                    .column("etudiant_id", SQLDataType.BIGINT)
                     .constraints(primaryKey("id"))
                     .execute();
+
+            // Also adds the relation when upgrading a database with an existing ticket table.
+            dsl.execute("ALTER TABLE ticket ADD COLUMN IF NOT EXISTS etudiant_id BIGINT");
+            dsl.execute("DO $$ BEGIN "
+                    + "IF NOT EXISTS (SELECT 1 FROM pg_constraint WHERE conname = 'ticket_etudiant_fk') THEN "
+                    + "ALTER TABLE ticket ADD CONSTRAINT ticket_etudiant_fk "
+                    + "FOREIGN KEY (etudiant_id) REFERENCES etudiant(id); "
+                    + "END IF; END $$");
 
             System.out.println("Table ticket created or already exists.");
         }
@@ -45,7 +54,7 @@ public final class CreateTables {
             DSLContext dsl = JdbcConfig.createDslContext(connection);
 
             dsl.createTableIfNotExists("etudiant")
-                    .column("id", SQLDataType.VARCHAR(36).nullable(false))
+                    .column("id", SQLDataType.BIGINT.nullable(false))
                     .column("email", SQLDataType.VARCHAR(255))
                     .column("nom", SQLDataType.VARCHAR(150))
                     .column("telephone", SQLDataType.VARCHAR(30))

@@ -19,9 +19,10 @@ public final class DatabaseSchema {
     public static final Field<String> TICKET_TITRE = field(name("ticket", "titre"), String.class);
     public static final Field<String> TICKET_DESCRIPTION = field(name("ticket", "description"), String.class);
     public static final Field<String> TICKET_TAG = field(name("ticket", "tag"), String.class);
+    public static final Field<Long> TICKET_ETUDIANT_ID = field(name("ticket", "etudiant_id"), Long.class);
 
     public static final Table<?> ETUDIANT = table(name("etudiant"));
-    public static final Field<String> ETUDIANT_ID = field(name("etudiant", "id"), String.class);
+    public static final Field<Long> ETUDIANT_ID = field(name("etudiant", "id"), Long.class);
     public static final Field<String> ETUDIANT_EMAIL = field(name("etudiant", "email"), String.class);
     public static final Field<String> ETUDIANT_NOM = field(name("etudiant", "nom"), String.class);
     public static final Field<String> ETUDIANT_TELEPHONE = field(name("etudiant", "telephone"), String.class);

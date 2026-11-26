@@ -47,6 +47,7 @@ public class JooqTicketRepository implements TicketRepository {
                 .set(TICKET_TITRE, ticket.getTitre())
                 .set(TICKET_DESCRIPTION, ticket.getDescription())
                 .set(TICKET_TAG, ticket.getTag())
+                .set(TICKET_ETUDIANT_ID, ticket.getEtudiant() == null ? null : ticket.getEtudiant().getId())
                 .execute();
     }
 
@@ -58,6 +59,7 @@ public class JooqTicketRepository implements TicketRepository {
             .set(TICKET_TITRE, ticket.getTitre())
             .set(TICKET_DESCRIPTION, ticket.getDescription())
             .set(TICKET_TAG, ticket.getTag())
+            .set(TICKET_ETUDIANT_ID, ticket.getEtudiant() == null ? null : ticket.getEtudiant().getId())
             .where(TICKET_ID.eq(ticket.getId()))
             .execute();
     }
